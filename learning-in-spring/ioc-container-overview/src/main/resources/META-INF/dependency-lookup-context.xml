@@ -12,4 +12,13 @@
         <property name="id" value="1" />
         <property name="name" value="wangfarui" />
     </bean>
+
+    <bean id="superUser" parent="user2" primary="true" class="com.wfr.learning.ioc.container.overview.domain.SuperUser">
+        <property name="address" value="wuhan" />
+    </bean>
+
+    <bean id="objectFactory" class="org.springframework.beans.factory.config.ObjectFactoryCreatingFactoryBean">
+        <property name="targetBeanName" value="superUser" />
+    </bean>
+
 </beans>
