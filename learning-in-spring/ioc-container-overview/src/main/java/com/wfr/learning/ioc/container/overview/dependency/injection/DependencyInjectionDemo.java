@@ -7,6 +7,7 @@ import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.ObjectFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.core.env.Environment;
 
 import java.util.List;
 
@@ -22,7 +23,8 @@ public class DependencyInjectionDemo extends DependencyLookupDemo {
         BeanFactory beanFactory = new ClassPathXmlApplicationContext("classpath:/META-INF/dependency-injection-context.xml");
         ApplicationContext applicationContext = new ClassPathXmlApplicationContext("classpath:/META-INF/dependency-injection-context.xml");
 
-        UserRepository userRepository = beanFactory.getBean("userRepository", UserRepository.class);
+        // 依赖来源一: 自定义Bean
+        UserRepository userRepository = applicationContext.getBean("userRepository", UserRepository.class);
 
 //        System.out.println(userRepository.getUsers());
 
@@ -33,6 +35,7 @@ public class DependencyInjectionDemo extends DependencyLookupDemo {
 
 //        System.out.println(beanFactory.getBean(BeanFactory.class));
 
+        // 依赖来源二: 依赖注入 （容器内建依赖）
         ObjectFactory<User> objectFactory = userRepository.getObjectFactory();
 
         System.out.println(objectFactory.getObject());
@@ -40,6 +43,24 @@ public class DependencyInjectionDemo extends DependencyLookupDemo {
         ObjectFactory<ApplicationContext> applicationContextObjectFactory = userRepository.getApplicationContextObjectFactory();
 
         System.out.println(applicationContextObjectFactory.getObject());
+
+        // 依赖来源三: 容器内建Bean
+        Environment environment = beanFactory.getBean(Environment.class);
+
+        System.out.println(environment);
+
+
+        compareBeanFactory(userRepository, applicationContext);
+    }
+
+    public static void compareBeanFactory(UserRepository userRepository, ApplicationContext applicationContext) {
+
+        System.out.println("比较BeanFactory");
+
+        System.out.println(userRepository.getBeanFactory());
+        System.out.println(applicationContext.getAutowireCapableBeanFactory());
+
+        System.out.println(userRepository.getBeanFactory() == applicationContext.getAutowireCapableBeanFactory());
 
     }
 
