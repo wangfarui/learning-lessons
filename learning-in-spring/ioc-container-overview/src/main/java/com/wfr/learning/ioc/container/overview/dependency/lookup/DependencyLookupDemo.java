@@ -34,6 +34,7 @@ public class DependencyLookupDemo {
         lookupCollectionByType(beanFactory);
     }
 
+    @SuppressWarnings("Duplicates")
     private static void lookupCollectionByType(BeanFactory beanFactory) {
         System.out.println("--- 根据类型查找Bean集合 ---");
         if (beanFactory instanceof ListableBeanFactory) {
