@@ -59,6 +59,8 @@ public class AnnotationBeanDefinitionDemo {
             registry.registerBeanDefinition(beanName, beanDefinitionBuilder.getBeanDefinition());
         } else {
             // 非命名 Bean 注册方法
+            // 生成通用名称的Bean，通用名称默认调 BeanDefinitionReaderUtils#uniqueBeanName
+            // bean name默认为 java全包路径 + 类名 + “#” + 自增数(从0开始)
             BeanDefinitionReaderUtils.registerWithGeneratedName(beanDefinitionBuilder.getBeanDefinition(), registry);
         }
 
