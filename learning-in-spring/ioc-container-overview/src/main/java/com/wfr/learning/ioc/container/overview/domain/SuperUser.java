@@ -18,6 +18,13 @@ public class SuperUser extends User{
 
     private String address;
 
+    public SuperUser() {}
+
+    public SuperUser(Long id, String name, String address) {
+        super(id, name);
+        this.address = address;
+    }
+
     @Override
     public String toString() {
         return "SuperUser{" +

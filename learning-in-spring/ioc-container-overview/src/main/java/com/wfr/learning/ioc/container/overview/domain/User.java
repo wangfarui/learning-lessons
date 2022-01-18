@@ -3,6 +3,7 @@ package com.wfr.learning.ioc.container.overview.domain;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import org.springframework.stereotype.Component;
 
 /**
  * description
@@ -19,4 +20,17 @@ public class User {
 
     private String name;
 
+    public User() {}
+
+    public User(Long id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+
+    public static User createUser() {
+        User user = new User();
+        user.setId(1L);
+        user.setName("wangfarui");
+        return user;
+    }
 }
