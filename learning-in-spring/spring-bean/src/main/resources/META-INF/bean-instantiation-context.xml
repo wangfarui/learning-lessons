@@ -6,12 +6,12 @@
         https://www.springframework.org/schema/beans/spring-beans.xsd">
 
     <!-- 构造器方法实例化 Bean -->
-<!--    <bean id="user-by-constructor-method" class="com.wfr.learning.spring.bean.instantiation.BeanInstantiationDemo"-->
-<!--          autowire="constructor" />-->
+    <bean id="user-by-constructor-method" class="com.wfr.learning.spring.bean.instantiation.BeanInstantiationDemo"
+          autowire="constructor" />
 
     <!-- 静态方法实例化 Bean -->
     <bean id="user-by-static-method" class="com.wfr.learning.ioc.container.overview.domain.User"
-          factory-method="createUser" />
+          factory-method="createUser" primary="true" />
 
     <!-- Bean工厂实例化 Bean -->
     <bean id="user-by-bean-factory" factory-bean="defaultUserFactory" factory-method="initUser" />

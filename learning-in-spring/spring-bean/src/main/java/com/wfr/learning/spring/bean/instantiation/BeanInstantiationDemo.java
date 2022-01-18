@@ -27,8 +27,8 @@ public class BeanInstantiationDemo {
         BeanFactory beanFactory = new ClassPathXmlApplicationContext(path);
 
         // 1. 构造器实例化Bean
-//        BeanInstantiationDemo user1 = beanFactory.getBean("user-by-constructor-method", BeanInstantiationDemo.class);
-//        System.out.println(user1.user);
+        BeanInstantiationDemo user1 = beanFactory.getBean("user-by-constructor-method", BeanInstantiationDemo.class);
+        System.out.println(user1.user);
 
         // 2. 静态方法实例化Bean
         User user2 = beanFactory.getBean("user-by-static-method", User.class);
