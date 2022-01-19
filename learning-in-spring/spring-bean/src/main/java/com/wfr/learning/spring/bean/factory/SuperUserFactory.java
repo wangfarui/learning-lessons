@@ -16,6 +16,7 @@ public class SuperUserFactory implements UserFactory {
         SuperUser user = new SuperUser();
         user.setId(10L);
         user.setName("super-wangfarui");
+        user.setAddress("wuhan");
         return user;
     }
 }

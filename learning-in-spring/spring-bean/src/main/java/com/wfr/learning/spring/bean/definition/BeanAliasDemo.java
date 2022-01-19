@@ -6,7 +6,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import java.util.Arrays;
 
 /**
- * description
+ * {@link org.springframework.core.AliasRegistry} bean Alias demo
  *
  * @author wangfarui
  * @since 2022/1/17

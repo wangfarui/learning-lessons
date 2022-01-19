@@ -20,7 +20,7 @@ import java.util.Map;
 import static org.springframework.beans.factory.support.BeanDefinitionBuilder.genericBeanDefinition;
 
 /**
- * description
+ * {@link AnnotationConfigApplicationContext} Annotation bean definition demo
  *
  * @author wangfarui
  * @since 2022/1/17
