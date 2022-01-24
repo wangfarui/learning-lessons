@@ -10,7 +10,7 @@ import java.util.Arrays;
 import java.util.Map;
 
 /**
- * description
+ * BeanFactory IOC容器示例
  *
  * @author wangfarui
  * @since 2022/1/14

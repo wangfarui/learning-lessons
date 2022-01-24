@@ -13,7 +13,16 @@ import java.util.Arrays;
 import java.util.Map;
 
 /**
- * description
+ * 注解ApplicationContext IOC容器示例
+ * <p>
+ * ApplicationContext 相较于 BeanFactory的区别, 额外拥有以下特性
+ * // 面向切面AOP
+ * // 配置元信息Configuration Metadata
+ * // 国际化i18n
+ * // 事件Events
+ * // 资源管理Resources
+ * // Environment抽象
+ * </p>
  *
  * @author wangfarui
  * @since 2022/1/14
@@ -40,7 +49,7 @@ public class AnnotationApplicationContextAsIocContainerDemo {
 
     }
 
-//    @Bean
+    //    @Bean
     public User user() {
         User user = new User();
         user.setId(1L);
