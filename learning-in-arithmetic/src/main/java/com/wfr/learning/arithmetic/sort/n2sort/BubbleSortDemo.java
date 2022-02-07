@@ -23,14 +23,16 @@ public class BubbleSortDemo {
         // 逆序度: 45 - 24 = 21
 
         int[] a = {8, 5, 4, 6, 1, 3, 10, 2, 7, 9};
+        int[] b = {10, 9, 8, 7, 6, 5, 4, 3, 2, 1};
 
         // 计算循环执行次数: 42, 计算比较执行次数: 21
         // 冒泡排序中, "计算比较执行次数"就是加有序度的次数, 所以 24 + 21 = 45
         arrayBubbleSort(a);
-
 //        arrayBubbleSort2(a);
+        System.out.println("a排序后的结果: " + Arrays.toString(a));
 
-        System.out.println("输出排序后的结果: " + Arrays.toString(a));
+        arrayBubbleSort(b);
+        System.out.println("b排序后的结果: " + Arrays.toString(b));
 
     }
 
