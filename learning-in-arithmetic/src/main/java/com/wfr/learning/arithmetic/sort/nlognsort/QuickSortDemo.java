@@ -50,12 +50,13 @@ public class QuickSortDemo {
             return;
         }
 
-        sort(a, 0, len - 1, a[len - 1]);
+        sort(a, 0, len - 1);
     }
 
-    public static void sort(int[] a, int start, int end, int point) {
+    public static void sort(int[] a, int start, int end) {
         if (start >= end) return;
 
+        int point = a[end];
         int i = start;
         int j = start;
 
@@ -74,9 +75,9 @@ public class QuickSortDemo {
         a[i] = point;
 
         if (i-1 > 0) {
-            sort(a, start, i-1, a[i-1]);
+            sort(a, start, i-1);
         }
-        sort(a, i+1, end, a[end]);
+        sort(a, i+1, end);
     }
 
 }
