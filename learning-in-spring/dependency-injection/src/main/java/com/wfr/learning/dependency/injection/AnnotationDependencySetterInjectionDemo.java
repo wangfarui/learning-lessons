@@ -1,36 +1,28 @@
 package com.wfr.learning.dependency.injection;
 
+import com.wfr.learning.dependency.injection.bean.AnnotationInjectionBeans;
 import com.wfr.learning.ioc.container.overview.domain.User;
-import org.springframework.beans.factory.xml.XmlBeanDefinitionReader;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.Bean;
 
 /**
- * 基于 {@link Bean} 的依赖 Constructor 注入示例
+ * 基于 {@link Bean} 依赖 Setter 方法注入示例
  *
  * @author wangfarui
  * @since 2022/2/24
  */
-public class AnnotationDependencyConstructorInjectionDemo {
-
-//    @Bean
-//    public User user() {
-//        return User.createUser();
-//    }
+public class AnnotationDependencySetterInjectionDemo {
 
     @Bean
     public UserHolder userHolder(User user) {
-        return new UserHolder(user);
+        UserHolder userHolder = new UserHolder();
+        userHolder.setUser(user);
+        return userHolder;
     }
 
     public static void main(String[] args) {
         AnnotationConfigApplicationContext applicationContext = new AnnotationConfigApplicationContext();
-        applicationContext.register(AnnotationDependencyConstructorInjectionDemo.class);
-
-        XmlBeanDefinitionReader reader = new XmlBeanDefinitionReader(applicationContext);
-        String location = "META-INF/dependency-lookup-context.xml";
-        int beanDefinitions = reader.loadBeanDefinitions(location);
-        System.out.printf("扫描到了%d个BeanDefinition%n", beanDefinitions);
+        applicationContext.register(AnnotationDependencySetterInjectionDemo.class, AnnotationInjectionBeans.class);
 
         applicationContext.refresh();
 
@@ -40,6 +32,4 @@ public class AnnotationDependencyConstructorInjectionDemo {
 
         applicationContext.close();
     }
-
-
 }
