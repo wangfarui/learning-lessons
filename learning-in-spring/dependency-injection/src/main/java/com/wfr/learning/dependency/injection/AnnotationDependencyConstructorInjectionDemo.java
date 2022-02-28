@@ -1,6 +1,8 @@
 package com.wfr.learning.dependency.injection;
 
 import com.wfr.learning.ioc.container.overview.domain.User;
+import org.springframework.beans.factory.UnsatisfiedDependencyException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.xml.XmlBeanDefinitionReader;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.Bean;
@@ -18,8 +20,33 @@ public class AnnotationDependencyConstructorInjectionDemo {
 //        return User.createUser();
 //    }
 
+    private UserHolder userHolder;
+
+    private static User user;
+
+    @Autowired
+    public AnnotationDependencyConstructorInjectionDemo() {
+        User user = User.createUser();
+        user.setName("通过无参构造方法创建");
+        this.userHolder = new UserHolder(user);
+    }
+
+    /**
+     * 入参的UserHolder不存在Spring Bean, applicationContext.refresh() 启动时会报错 {@link UnsatisfiedDependencyException}
+     * <br/>
+     * 基于构造方法初始化的Bean 会早于 {@link Bean} 初始化
+     */
+    public AnnotationDependencyConstructorInjectionDemo(UserHolder userHolder) {
+        this.userHolder = userHolder;
+    }
+
+    public AnnotationDependencyConstructorInjectionDemo(User user) {
+        AnnotationDependencyConstructorInjectionDemo.user = user;
+    }
+
     @Bean
     public UserHolder userHolder(User user) {
+        user.setName("当前类的userHolder");
         return new UserHolder(user);
     }
 
@@ -37,6 +64,11 @@ public class AnnotationDependencyConstructorInjectionDemo {
         UserHolder userHolder = applicationContext.getBean(UserHolder.class);
 
         System.out.println(userHolder);
+
+        System.out.println("AnnotationDependencyConstructorInjectionDemo.user : " + AnnotationDependencyConstructorInjectionDemo.user);
+
+        AnnotationDependencyConstructorInjectionDemo demo = applicationContext.getBean(AnnotationDependencyConstructorInjectionDemo.class);
+        System.out.println("demo.userHolder : " + demo.userHolder);
 
         applicationContext.close();
     }
