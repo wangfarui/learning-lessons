@@ -1,9 +1,9 @@
 package com.wfr.learning.ioc.container.overview.domain;
 
+import com.wfr.learning.ioc.container.overview.enums.City;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
-import org.springframework.stereotype.Component;
 
 import java.util.List;
 
@@ -42,8 +42,12 @@ public class User {
     }
 
     public static User createUser() {
+        return createUser(1L);
+    }
+
+    public static User createUser(Long id) {
         User user = new User();
-        user.setId(1L);
+        user.setId(id);
         user.setName("wangfarui");
         user.setCity(City.WUHAN);
         return user;

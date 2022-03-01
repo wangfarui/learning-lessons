@@ -6,7 +6,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 /**
- * description
+ * 基于 {@link User} 的超级用户实体
  *
  * @author wangfarui
  * @since 2022/1/13

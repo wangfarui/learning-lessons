@@ -1,4 +1,4 @@
-package com.wfr.learning.ioc.container.overview.domain;
+package com.wfr.learning.ioc.container.overview.enums;
 
 /**
  * 城市枚举

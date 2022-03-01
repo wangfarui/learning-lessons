@@ -9,7 +9,7 @@
         https://www.springframework.org/schema/context/spring-context.xsd">
 
     <bean id="user2" class="com.wfr.learning.ioc.container.overview.domain.User">
-        <property name="id" value="1" />
+        <property name="id" value="2" />
         <property name="name" value="wangfarui" />
         <property name="city" value="WUHAN" />
         <!-- 数组和集合 都可以用以下两种方式进行赋值 -->
