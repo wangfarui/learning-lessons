@@ -11,6 +11,17 @@
     <bean id="user2" class="com.wfr.learning.ioc.container.overview.domain.User">
         <property name="id" value="1" />
         <property name="name" value="wangfarui" />
+        <property name="city" value="WUHAN" />
+        <!-- 数组和集合 都可以用以下两种方式进行赋值 -->
+        <!-- 1. 字符串逗号分隔 -->
+        <!-- 2. list标签 -->
+        <property name="workCities" value="WUHAN, BEIJING" />
+        <property name="lifeCities">
+            <list>
+                <value>WUHAN</value>
+                <value>SHANGHAI</value>
+            </list>
+        </property>
     </bean>
 
     <bean id="superUser" parent="user2" primary="true" class="com.wfr.learning.ioc.container.overview.domain.SuperUser">
