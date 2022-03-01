@@ -2,6 +2,8 @@ package com.wfr.learning.dependency.injection;
 
 import com.wfr.learning.dependency.injection.annotation.InjectUser;
 import com.wfr.learning.dependency.injection.annotation.MyAutowired;
+import com.wfr.learning.dependency.injection.annotation.MyInjectUser;
+import com.wfr.learning.dependency.injection.annotation.MySuperInjectUser;
 import com.wfr.learning.ioc.container.overview.domain.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor;
@@ -50,6 +52,12 @@ public class CustomAnnotationDependencyInjectionDemo {
     @Inject
     private User user4;
 
+    @MyInjectUser
+    private User user5;
+
+    @MySuperInjectUser
+    private User user6;
+
 
     /**
      * 指定Bean名称为 {@link AUTOWIRED_ANNOTATION_PROCESSOR_BEAN_NAME} 时，会覆盖默认的BeanPostProcessor
@@ -83,6 +91,8 @@ public class CustomAnnotationDependencyInjectionDemo {
         System.out.println("demo.user2 : " + demo.user2);
         System.out.println("demo.user3 : " + demo.user3);
         System.out.println("demo.user4 : " + demo.user4);
+        System.out.println("demo.user5 : " + demo.user5);
+        System.out.println("demo.user6 : " + demo.user6);
 
         applicationContext.close();
     }
