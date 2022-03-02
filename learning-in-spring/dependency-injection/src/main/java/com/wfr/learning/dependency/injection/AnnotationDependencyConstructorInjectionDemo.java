@@ -24,6 +24,9 @@ public class AnnotationDependencyConstructorInjectionDemo {
 
     private static User user;
 
+    /**
+     * 构造方法注入时，若所有构造方法都未指定 @Autowired ,则默认调无参构造方法
+     */
     @Autowired
     public AnnotationDependencyConstructorInjectionDemo() {
         User user = User.createUser();
