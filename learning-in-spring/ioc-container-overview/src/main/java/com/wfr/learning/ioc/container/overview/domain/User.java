@@ -16,7 +16,7 @@ import java.util.List;
 @Getter
 @Setter
 @ToString
-public class User {
+public class User implements IUser {
 
     private Long id;
 

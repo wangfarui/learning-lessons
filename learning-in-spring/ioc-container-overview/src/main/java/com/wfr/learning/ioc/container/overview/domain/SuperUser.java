@@ -31,4 +31,9 @@ public class SuperUser extends User{
                 "address='" + address + '\'' + " " +
                 super.toString() + '}';
     }
+
+    @Override
+    public void printUser() {
+        System.out.println("this is super user");
+    }
 }
