@@ -11,4 +11,8 @@
         <property name="user" ref="superUser" />
     </bean>
 
+    <bean id="prototypeUserHolder" class="com.wfr.learning.dependency.injection.UserHolder" scope="prototype">
+        <property name="user" ref="superUser" />
+    </bean>
+
 </beans>
