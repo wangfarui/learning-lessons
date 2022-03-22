@@ -16,6 +16,7 @@ import javax.annotation.PostConstruct;
  * @since 2022/3/10
  */
 @Configuration
+// 并非只能读取标准格式(properties、yaml、yml等)的资源文件, 文件后缀名可随意
 @PropertySource(value = "classpath:/META-INF/my.properties", encoding = "GBK")
 public class ExternalConfigurationDependencySourceDemo {
 
