@@ -4,7 +4,10 @@ import com.wfr.learning.ioc.container.overview.enums.City;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import org.springframework.beans.factory.BeanNameAware;
 
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
 import java.util.List;
 
 /**
@@ -16,7 +19,7 @@ import java.util.List;
 @Getter
 @Setter
 @ToString
-public class User implements IUser {
+public class User implements IUser, BeanNameAware {
 
     private Long id;
 
@@ -28,7 +31,10 @@ public class User implements IUser {
 
     private List<City> lifeCities;
 
-    public User() {}
+    private String beanName;
+
+    public User() {
+    }
 
     public User(Long id, String name) {
         this.id = id;
@@ -51,5 +57,20 @@ public class User implements IUser {
         user.setName("wangfarui");
         user.setCity(City.WUHAN);
         return user;
+    }
+
+    @Override
+    public void setBeanName(String name) {
+        this.beanName = name;
+    }
+
+    @PostConstruct
+    public void init() {
+        System.out.println("User Bean [" + beanName + "] 初始化中...");
+    }
+
+    @PreDestroy
+    public void destroy() {
+        System.out.println("User Bean [" + beanName + "] 销毁中...");
     }
 }
