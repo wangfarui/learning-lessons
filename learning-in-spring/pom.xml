@@ -19,6 +19,7 @@
         <module>dependency-source</module>
         <module>bean-scope</module>
         <module>bean-lifecycle</module>
+        <module>application-context-lifecycle</module>
     </modules>
 
     <name>learning-in-spring</name>
