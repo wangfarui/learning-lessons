@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 import org.springframework.beans.factory.BeanNameAware;
+import org.springframework.beans.factory.DisposableBean;
+import org.springframework.beans.factory.InitializingBean;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
@@ -12,6 +14,9 @@ import java.util.List;
 
 /**
  * 用户实体
+ *
+ * <p>Bean初始化调用方法的先后顺序为: @PostConstruct > InitializingBean > initMethod()
+ * <p>Bean销毁调用方法的先后顺序为: @PreDestroy > DisposableBean > destroyMethod()
  *
  * @author wangfarui
  * @since 2022/1/11
@@ -70,7 +75,7 @@ public class User implements IUser, BeanNameAware {
     }
 
     @PreDestroy
-    public void destroy() {
+    public void doDestroy() {
         System.out.println("User Bean [" + beanName + "] 销毁中...");
     }
 }
