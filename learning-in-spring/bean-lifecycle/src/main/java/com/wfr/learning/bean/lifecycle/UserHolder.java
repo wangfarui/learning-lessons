@@ -1,15 +1,19 @@
 package com.wfr.learning.bean.lifecycle;
 
 import com.wfr.learning.ioc.container.overview.domain.User;
+import com.wfr.learning.ioc.container.overview.enums.City;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.BeanFactoryAware;
 import org.springframework.beans.factory.BeanNameAware;
+import org.springframework.beans.factory.SmartInitializingSingleton;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * {@link User} 的 Holder 类
@@ -17,7 +21,7 @@ import javax.annotation.PreDestroy;
  * @author wangfarui
  * @since 2022/2/18
  */
-public class UserHolder implements BeanNameAware, BeanFactoryAware, ApplicationContextAware {
+public class UserHolder implements BeanNameAware, BeanFactoryAware, ApplicationContextAware, SmartInitializingSingleton {
 
     private User user;
 
@@ -73,5 +77,16 @@ public class UserHolder implements BeanNameAware, BeanFactoryAware, ApplicationC
     @Override
     public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
         this.applicationContext = applicationContext;
+    }
+
+    @Override
+    public void afterSingletonsInstantiated() {
+        this.user.setLifeCities(Arrays.asList(City.WUHAN, City.BEIJING));
+    }
+
+    @Override
+    protected void finalize() throws Throwable {
+        System.out.println("The UserHolder [" + user.getId() + "] is finalized...");
+        super.finalize();
     }
 }

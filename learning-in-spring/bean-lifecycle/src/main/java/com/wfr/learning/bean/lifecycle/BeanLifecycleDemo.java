@@ -1,15 +1,13 @@
 package com.wfr.learning.bean.lifecycle;
 
+import com.wfr.learning.bean.lifecycle.bean.post.processor.MyDestructionAwareBeanPostProcessor;
 import com.wfr.learning.bean.lifecycle.bean.post.processor.MyInstantiationAwareBeanPostProcessor;
 import com.wfr.learning.ioc.container.overview.domain.SuperUser;
 import com.wfr.learning.ioc.container.overview.domain.User;
 import org.springframework.beans.factory.SmartInitializingSingleton;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.beans.factory.config.BeanDefinition;
-import org.springframework.beans.factory.config.BeanDefinitionHolder;
-import org.springframework.beans.factory.config.BeanFactoryPostProcessor;
-import org.springframework.beans.factory.config.InstantiationAwareBeanPostProcessor;
+import org.springframework.beans.factory.config.*;
 import org.springframework.beans.factory.support.*;
 import org.springframework.beans.factory.xml.XmlBeanDefinitionReader;
 import org.springframework.context.annotation.Bean;
@@ -20,9 +18,11 @@ import org.springframework.core.io.Resource;
 import org.springframework.context.annotation.AnnotatedBeanDefinitionReader;
 import org.springframework.context.event.EventListenerMethodProcessor;
 import org.springframework.core.io.support.EncodedResource;
+import org.springframework.context.annotation.CommonAnnotationBeanPostProcessor;
 
 import java.util.Arrays;
 import java.util.Map;
+import javax.annotation.PostConstruct;
 
 /**
  * Spring Bean生命周期示例
@@ -58,14 +58,14 @@ public class BeanLifecycleDemo {
     }
 
     @Bean("userHolder")
-    private UserHolder annotatedUserHolder(@Qualifier("lazyUser") User user) {
+    private UserHolder annotatedUserHolder(@Qualifier("annotatedUser") User user) {
         return new UserHolder(user);
     }
 
     /**
      * Bean生命周期总结为: 3、4、6、7、8、9、10、11、12、13、14、15、16、17
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
         DefaultListableBeanFactory beanFactory = new DefaultListableBeanFactory();
 
         // 1. BeanDefinition 元信息配置
@@ -100,28 +100,33 @@ public class BeanLifecycleDemo {
 
         // 6. Spring Bean 实例化前阶段
         // 7. Spring Bean 实例化阶段
+        // 实例化阶段时, 会调用 MergedBeanDefinitionPostProcessor#postProcessMergedBeanDefinition 修改合并后的BeanDefinition,
+        // 比如 CommonAnnotationBeanPostProcessor 继承的 InitDestroyAnnotationBeanPostProcessor 类会调用 findLifecycleMetadata 方法,
+        // 查找 Bean Class 中的 @PostConstruct、@PreDestroy 标注的方法, 并存放于 InitDestroyAnnotationBeanPostProcessor.lifecycleMetadataCache 中
         // 8. Spring Bean 实例化后阶段
+        // 9. Spring Bean 属性赋值前阶段
+        // 10. Spring Bean 属性赋值阶段
+        // 11. Spring Bean Aware接口回调阶段
+        // Aware接口回调阶段 分为两个子阶段, 根据BeanFactory类型决定
+        // BeanFactory有 BeanNameAware、BeanClassLoaderAware、BeanFactoryAware
+        // ApplicationContext有 EnvironmentAware、EmbeddedValueResolverAware、ResourceLoaderAware、ApplicationEventPublisherAware、MessageSourceAware、ApplicationContextAware
+        // 12. Spring Bean 初始化前阶段
+        // 13. Spring Bean 初始化阶段
+        // 初始化时回调 InitializingBean 接口的 afterPropertiesSet() 方法, 以及自定义的 initMethods
+        // 14. Spring Bean 初始化后阶段
         doInstantiationAwareBeanPostProcessor(beanFactory);
 
-        // 9. Spring Bean 属性赋值前阶段
-
-        // 10. Spring Bean 属性赋值阶段
-
-        // 11. Spring Bean Aware接口回调阶段
-
-        // 12. Spring Bean 初始化前阶段
-
-        // 13. Spring Bean 初始化阶段
-
-        // 14. Spring Bean 初始化后阶段
-
         // 15. Spring Bean 初始化完成阶段
+        afterSingletonsInstantiated();
 
         // 16. Spring Bean 销毁前阶段
+        doDestructionAwareBeanPostProcessor(beanFactory);
 
         // 17. Spring Bean 销毁阶段
+        destroyBeanPhase();
 
         // 18. Spring Bean 垃圾收集
+        systemGCPhase();
 
         // finish-1: 手动触发BeanFactory后置处理器
         postProcessBeanFactory(beanFactory);
@@ -144,16 +149,54 @@ public class BeanLifecycleDemo {
         UserHolder userHolder = beanFactory.getBean(UserHolder.class);
         System.out.println("userHolder: " + userHolder);
 
+        // 执行 Bean 销毁（容器内）
+        beanFactory.destroyBean("userHolder", userHolder);
+        // Bean 销毁并不意味着 Bean 垃圾回收了
+        System.out.println(userHolder);
+
         // 销毁 BeanFactory 中所有的单例Bean
         beanFactory.destroySingletons();
 
-//        beanFactory.destroyBean(userHolder);
-//        // 循环依赖异常
-//        userHolder = beanFactory.getBean(UserHolder.class);
-//        System.out.println("userHolder: " + userHolder);
+        System.gc();
+
+        Thread.sleep(5000L);
+
+        System.gc();
+    }
+
+    /**
+     * Spring Bean 垃圾收集阶段
+     */
+    private static void systemGCPhase() {
 
     }
 
+    /**
+     * 销毁阶段, 回调 @PreDestroy、DisposableBean 接口的 destroy() 方法、自定义 destroyMethods
+     */
+    private static void destroyBeanPhase() {
+
+    }
+
+    /**
+     * 销毁前阶段, 回调 {@link DestructionAwareBeanPostProcessor#postProcessBeforeDestruction} 方法
+     */
+    private static void doDestructionAwareBeanPostProcessor(AbstractBeanFactory beanFactory) {
+        beanFactory.addBeanPostProcessor(new MyDestructionAwareBeanPostProcessor());
+    }
+
+    /**
+     * 初始化完成阶段是在所有Bean都初始化完成后, 再遍历进行. 并且仅对实现了 {@link SmartInitializingSingleton} 接口的Bean执行 afterSingletonsInstantiated 方法
+     */
+    private static void afterSingletonsInstantiated() {
+
+    }
+
+    /**
+     * 实例化、属性赋值、初始化 阶段
+     *
+     * <p>在 {@link CommonAnnotationBeanPostProcessor#postProcessBeforeInitialization(Object, String)} 中会执行Bean{@link PostConstruct}注册的初始化方法
+     */
     private static void doInstantiationAwareBeanPostProcessor(AbstractBeanFactory beanFactory) {
         beanFactory.addBeanPostProcessor(new MyInstantiationAwareBeanPostProcessor());
     }
