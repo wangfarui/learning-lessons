@@ -1,5 +1,6 @@
 package com.wfr.learning.bean.lifecycle.bean.post.processor;
 
+import com.wfr.learning.ioc.container.overview.domain.SuperUser;
 import com.wfr.learning.ioc.container.overview.domain.User;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.DestructionAwareBeanPostProcessor;
@@ -26,6 +27,13 @@ public class MyDestructionAwareBeanPostProcessor implements DestructionAwareBean
 
     @Override
     public boolean requiresDestruction(Object bean) {
+        if (bean instanceof User) {
+            User user = (User) bean;
+            if (ObjectUtils.nullSafeEquals(user.getBeanName(), "annotatedUser")) {
+                System.out.println("close postProcessBeforeDestruction - user : " + user);
+                return false;
+            }
+        }
         return true;
     }
 }
