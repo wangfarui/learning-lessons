@@ -39,6 +39,7 @@ public class User implements IUser, BeanNameAware {
     private String beanName;
 
     public User() {
+        this.name = "default name";
     }
 
     public User(Long id, String name) {
