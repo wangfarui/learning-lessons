@@ -21,6 +21,7 @@
         <module>bean-lifecycle</module>
         <module>application-context-lifecycle</module>
         <module>configuration-metadata</module>
+        <module>resource</module>
     </modules>
 
     <name>learning-in-spring</name>
