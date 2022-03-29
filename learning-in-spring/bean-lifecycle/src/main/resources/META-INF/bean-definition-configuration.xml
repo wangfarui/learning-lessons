@@ -4,7 +4,7 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans
         https://www.springframework.org/schema/beans/spring-beans.xsd">
 
-    <bean id="userBean" class="com.wfr.learning.ioc.container.overview.domain.User" primary="true">
+    <bean id="userBean" class="com.wfr.learning.in.spring.ioc.container.overview.domain.User" primary="true">
         <property name="id" value="92" />
         <property name="name" value="xml用户" />
     </bean>

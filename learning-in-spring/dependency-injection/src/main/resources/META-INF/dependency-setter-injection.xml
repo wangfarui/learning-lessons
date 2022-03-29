@@ -7,11 +7,11 @@
 
     <import resource="dependency-lookup-context.xml" />
 
-    <bean id="userHolder" class="com.wfr.learning.dependency.injection.UserHolder">
+    <bean id="userHolder" class="com.wfr.learning.in.spring.dependency.injection.UserHolder">
         <property name="user" ref="superUser" />
     </bean>
 
-    <bean id="prototypeUserHolder" class="com.wfr.learning.dependency.injection.UserHolder" scope="prototype">
+    <bean id="prototypeUserHolder" class="com.wfr.learning.in.spring.dependency.injection.UserHolder" scope="prototype">
         <property name="user" ref="superUser" />
     </bean>
 

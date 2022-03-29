@@ -6,7 +6,7 @@
         https://www.springframework.org/schema/beans/spring-beans.xsd">
 
     <bean id="userFactoryByServiceLoader" class="org.springframework.beans.factory.serviceloader.ServiceLoaderFactoryBean">
-        <property name="serviceType" value="com.wfr.learning.spring.bean.factory.UserFactory" />
+        <property name="serviceType" value="com.wfr.learning.in.spring.spring.bean.factory.UserFactory" />
     </bean>
 
 </beans>

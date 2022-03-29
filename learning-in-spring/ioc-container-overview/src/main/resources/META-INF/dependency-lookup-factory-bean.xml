@@ -10,7 +10,7 @@
 
     <import resource="dependency-lookup-context.xml" />
 
-    <bean id="userFactory2" class="com.wfr.learning.ioc.container.overview.domain.UserFactory">
+    <bean id="userFactory2" class="com.wfr.learning.in.spring.ioc.container.overview.domain.UserFactory">
 
     </bean>
 
