@@ -1,4 +1,4 @@
-package com.wfr.learning.arithmetic.sort.nlognsort;
+package com.wfr.learning.in.arithmetic.sort.nlognsort;
 
 import java.util.Arrays;
 

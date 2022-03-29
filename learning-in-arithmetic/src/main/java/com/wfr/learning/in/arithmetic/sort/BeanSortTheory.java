@@ -1,4 +1,4 @@
-package com.wfr.learning.arithmetic.sort;
+package com.wfr.learning.in.arithmetic.sort;
 
 /**
  * 有序度: 数组中具有有序关系的元素对的个数
