@@ -23,6 +23,7 @@
         <module>configuration-metadata</module>
         <module>resource</module>
         <module>i18n</module>
+        <module>validation</module>
     </modules>
 
     <name>learning-in-spring</name>
