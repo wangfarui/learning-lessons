@@ -13,6 +13,7 @@
 
     <modules>
         <module>autoconfigure</module>
+        <module>test-autoconfigure</module>
     </modules>
 
     <artifactId>learning-in-springboot</artifactId>
