@@ -1,4 +1,4 @@
-package com.wfr.learning.in.arithmetic.sort.n2sort;
+package com.wfr.learning.in.arithmetic.algorithm.sort.n2sort;
 
 import java.util.Arrays;
 
