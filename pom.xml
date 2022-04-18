@@ -11,6 +11,7 @@
         <module>learning-in-arithmetic</module>
         <module>learning-in-spring</module>
         <module>learning-in-springboot</module>
+        <module>learning-in-jdk</module>
     </modules>
     <packaging>pom</packaging>
 
