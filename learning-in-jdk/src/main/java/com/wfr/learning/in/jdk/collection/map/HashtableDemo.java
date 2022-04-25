@@ -14,6 +14,10 @@ public class HashtableDemo {
 
     static String PRESENT = "present";
 
+    /**
+     * 该示例不能说明 {@link Hashtable} 不是线程安全的，因为 thread1 和 thread2 之间没有互斥关系。<br/>
+     * 因为 thread1 只执行了 put() 方法，thread2 只执行了 remove() 方法，{@link Hashtable} 都是使用的 synchronized 锁实例方法，所以两者不互斥
+     */
     public static void main(String[] args) throws InterruptedException {
 //        insertNode(2);
 //        selectNode(2);
