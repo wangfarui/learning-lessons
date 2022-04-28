@@ -68,4 +68,14 @@ public class Student {
         s.setClassroom(student.getClassroom());
         return s;
     }
+
+    @Override
+    public String toString() {
+        return "Student{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", birthday=" + birthday +
+                ", classroom=" + classroom +
+                '}';
+    }
 }
