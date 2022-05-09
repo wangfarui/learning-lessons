@@ -30,6 +30,28 @@ public class InsertionSortDemo {
 
     }
 
+    public static void simpleArrayInsertionSort(int[] a) {
+        int len = a.length;
+        if (len < 1) {
+            return;
+        }
+
+        for (int i = 1; i < len; i++) {
+            int temp = a[i];
+            int j = i - 1;
+
+            for (; j >= 0; j--) {
+                if (temp < a[j]) {
+                    a[j + 1] = a[j];
+                } else {
+                    break;
+                }
+            }
+
+            a[j + 1] = temp;
+        }
+    }
+
     public static void arrayInsertionSort(int[] a) {
         int len = a.length;
         if (len < 1) {

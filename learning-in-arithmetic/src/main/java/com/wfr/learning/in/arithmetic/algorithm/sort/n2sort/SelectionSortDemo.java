@@ -30,6 +30,28 @@ public class SelectionSortDemo {
 
     }
 
+    public static void simpleArraySelectionSort(int[] a) {
+        int len = a.length;
+        if (len < 1) {
+            return;
+        }
+
+        for (int i = 0; i < len - 1; i++) {
+            int minIndex = i;
+            for (int j = i+1; j < len; j++) {
+                if (a[minIndex] > a[j]) {
+                    minIndex = j;
+                }
+            }
+
+            if (minIndex != i) {
+                int temp = a[minIndex];
+                a[minIndex] = a[i];
+                a[i] = temp;
+            }
+        }
+    }
+
     public static void arraySelectionSort(int[] a) {
         int len = a.length;
         if (len < 1) {

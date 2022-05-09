@@ -36,6 +36,32 @@ public class BubbleSortDemo {
 
     }
 
+    public static void simpleArrayBubbleSort(int[] a) {
+        int len = a.length;
+        if (len < 1) {
+            return;
+        }
+
+        for (int i = 0; i < len; i++) {
+            boolean hasSorted = false;
+
+            int subLen = len - i - 1;
+            for (int j = 0; j < subLen; j++) {
+                if (a[j] > a[j + 1]) {
+                    int temp = a[j];
+                    a[j] = a[j + 1];
+                    a[j + 1] = temp;
+                    hasSorted = true;
+                }
+            }
+
+            // 当前一次外循环没有需要排序的, 证明当前 [0, subLen] 已经是有序的, 可以提前退出
+            if (!hasSorted) {
+                break;
+            }
+        }
+    }
+
     public static void arrayBubbleSort(int[] a) {
         int len = a.length;
         if (len < 1) {
