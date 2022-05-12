@@ -24,6 +24,7 @@
         <module>resource</module>
         <module>i18n</module>
         <module>validation</module>
+        <module>annotation</module>
     </modules>
 
     <name>learning-in-spring</name>
@@ -38,6 +39,10 @@
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-tx</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-web</artifactId>
         </dependency>
 
         <!-- lombok -->
