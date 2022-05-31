@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>工作倒计时</title>
+    <style>
+        h1 {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+<h1>现在是北京时间: <span id="nowDateTime"></span></h1>
+<h1 id="getOffWorkTime"></h1>
+<br/>
+<h1>指定下班时间: <input type="time" id="customTime" /></h1>
+<h1 id="customOffWorkTime"></h1>
+</body>
+
+<script type="text/javascript">
+    let int = self.setInterval("clock()", 1000);
+    let GET_OFF_WORK_SECONDS = 68400;
+
+    function clock() {
+        let d = new Date();
+        document.getElementById("nowDateTime").innerText = d.toLocaleString();
+
+        computeAndFillElementValue(d, GET_OFF_WORK_SECONDS, "getOffWorkTime");
+
+        let customTimeVal = document.getElementById("customTime").value;
+        if (customTimeVal) {
+            let customTimeValues = customTimeVal.split(":");
+            if (customTimeValues instanceof Array && customTimeValues.length === 2) {
+                let customTime = new Date(1970, 1, 1, 0, 0, 0, 0);
+                customTime.setHours(customTimeValues[0]);
+                customTime.setMinutes(customTimeValues[1]);
+                computeAndFillElementValue(d, getSumSeconds(customTime), "customOffWorkTime");
+            }
+        }
+    }
+
+    function getSumSeconds(d) {
+        return d.getHours() * 3600 + d.getMinutes() * 60 + d.getSeconds();
+    }
+
+    function getTimeStrBySumSeconds(seconds) {
+        let hour = Math.trunc(seconds / 3600);
+        let minute = Math.trunc(seconds % 3600 / 60);
+        let second = seconds % 60;
+        return formatTime(hour) + ":" + formatTime(minute) + ":" + formatTime(second);
+    }
+
+    function formatTime(t) {
+        return t < 10 ? "0" + t : t;
+    }
+
+    function computeAndFillElementValue(nowTime, offWorkTime, elementId) {
+        let sumSeconds = getSumSeconds(nowTime);
+        let getOffWorkSeconds = offWorkTime - sumSeconds;
+        if (getOffWorkSeconds <= 0) {
+            document.getElementById(elementId).innerText = "已经下班了！还在卷?";
+        } else {
+            let hours = Math.trunc(getOffWorkSeconds / 3600);
+            let minutes = Math.trunc(getOffWorkSeconds % 3600 / 60);
+            let seconds = getOffWorkSeconds % 60;
+            let getOffWorkTimeStr = "";
+            if (hours !== 0) {
+                getOffWorkTimeStr += (hours + "小时");
+            }
+            if (minutes !== 0) {
+                getOffWorkTimeStr += (minutes + "分钟");
+            }
+            if (seconds !== 0) {
+                getOffWorkTimeStr += (seconds + "秒");
+            }
+            document.getElementById(elementId).innerText = "距离" + getTimeStrBySumSeconds(offWorkTime) + "下班还剩: " + getOffWorkTimeStr;
+        }
+    }
+</script>
+</html>
