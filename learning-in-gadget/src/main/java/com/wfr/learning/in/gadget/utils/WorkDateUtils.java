@@ -1,4 +1,4 @@
-package com.wfr.learning.in.jdk.utils;
+package com.wfr.learning.in.gadget.utils;
 
 import java.time.LocalDateTime;
 import java.time.LocalTime;

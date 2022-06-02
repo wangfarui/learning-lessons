@@ -12,6 +12,7 @@
         <module>learning-in-spring</module>
         <module>learning-in-springboot</module>
         <module>learning-in-jdk</module>
+        <module>learning-in-gadget</module>
     </modules>
     <packaging>pom</packaging>
 
