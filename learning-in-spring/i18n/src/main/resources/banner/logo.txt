@@ -1,0 +1,4 @@
+
+this is a logo text.
+
+-- version 1.0.0 --
