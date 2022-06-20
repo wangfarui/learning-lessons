@@ -36,6 +36,8 @@ public class User implements IUser, BeanNameAware {
 
     private String beanName;
 
+    private Company company;
+
     public User() {
         this.name = "default name";
     }
