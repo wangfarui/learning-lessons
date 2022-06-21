@@ -1,0 +1,9 @@
+wfr:
+  id: 1L
+
+spring:
+  application:
+    name: common
+
+server:
+  port: 8082
