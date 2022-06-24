@@ -1,0 +1,2 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+  com.wfr.learning.in.springboot.test.web.starter.BaseResponseBodyAdviceAutoConfiguration

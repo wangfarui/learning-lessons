@@ -10,6 +10,16 @@ package com.wfr.learning.in.springboot.test.web;
  */
 public interface ApiStatus {
 
+    /**
+     * 默认HTTP状态码
+     */
+    int DEFAULT_CODE = 200;
+
+    /**
+     * 默认响应描述内容
+     */
+    String DEFAULT_MESSAGE = "Success";
+
     int getCode();
 
     String getMessage();
