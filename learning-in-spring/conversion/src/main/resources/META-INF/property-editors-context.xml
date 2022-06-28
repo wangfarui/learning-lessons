@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans
+        xmlns="http://www.springframework.org/schema/beans"
+        xmlns:context="http://www.springframework.org/schema/context"
+        xmlns:util="http://www.springframework.org/schema/util"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.springframework.org/schema/beans
+        https://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        https://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/util
+        https://www.springframework.org/schema/util/spring-util.xsd">
+
+    <bean class="com.wfr.learning.in.spring.conversion.CustomizedPropertyEditorRegistrar"/>
+
+    <bean id="conversionService" class="org.springframework.context.support.ConversionServiceFactoryBean">
+        <property name="converters">
+            <bean class="com.wfr.learning.in.spring.conversion.PropertiesToStringConverter"/>
+        </property>
+    </bean>
+
+    <!-- 对应 CustomizedPropertyEditorRegistrar 注册的自定义Editor -->
+    <util:properties id="context">
+        <!-- prop 对应的就是 context 指定的requiredType类的成员变量 -->
+        <prop key="id">1</prop>
+        <prop key="name">wangfarui</prop>
+        <prop key="unknownField">未知字段</prop>
+    </util:properties>
+
+    <bean id="xmlUser" class="com.wfr.learning.in.spring.ioc.container.overview.domain.User">
+        <property name="id" value="2"/>
+        <property name="name" value="wfr"/>
+        <property name="context">
+            <value>
+                sex = '男'
+                age = 18
+            </value>
+        </property>
+        <property name="contextAsText" ref="context"/> <!-- Properties -> String -->
+    </bean>
+</beans>

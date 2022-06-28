@@ -11,4 +11,11 @@
 
     <artifactId>conversion</artifactId>
 
+    <dependencies>
+        <dependency>
+            <groupId>com.wfr.learning</groupId>
+            <artifactId>ioc-container-overview</artifactId>
+            <version>${version}</version>
+        </dependency>
+    </dependencies>
 </project>

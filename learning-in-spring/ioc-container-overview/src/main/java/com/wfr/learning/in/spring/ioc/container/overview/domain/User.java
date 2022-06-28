@@ -9,6 +9,7 @@ import org.springframework.beans.factory.BeanNameAware;
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import java.util.List;
+import java.util.Properties;
 
 /**
  * 用户实体
@@ -37,6 +38,10 @@ public class User implements IUser, BeanNameAware {
     private String beanName;
 
     private Company company;
+
+    private Properties context;
+
+    private String contextAsText;
 
     public User() {
         this.name = "default name";
