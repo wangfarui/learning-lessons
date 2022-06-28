@@ -26,6 +26,7 @@
         <module>validation</module>
         <module>annotation</module>
         <module>data-binding</module>
+        <module>conversion</module>
     </modules>
 
     <name>learning-in-spring</name>
