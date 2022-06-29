@@ -13,6 +13,7 @@
         <module>learning-in-springboot</module>
         <module>learning-in-jdk</module>
         <module>learning-in-gadget</module>
+        <module>learning-in-spring/event</module>
     </modules>
     <packaging>pom</packaging>
 
