@@ -27,6 +27,7 @@
         <module>annotation</module>
         <module>data-binding</module>
         <module>conversion</module>
+        <module>generic</module>
     </modules>
 
     <name>learning-in-spring</name>
