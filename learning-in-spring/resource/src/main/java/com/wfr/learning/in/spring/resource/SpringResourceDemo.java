@@ -56,7 +56,7 @@ public class SpringResourceDemo implements InitializingBean {
      * 读取文件
      */
     private static void readLocalFile() throws IOException {
-        String currentJavaFilePath = "/" + System.getProperty("user.dir") + "/learning-in-spring/resource/src/main/java/com/wfr/learning/resource/SpringResourceDemo.java";
+        String currentJavaFilePath = "/" + System.getProperty("user.dir") + "/learning-in-spring/resource/src/main/java/com/wfr/learning/in/spring/resource/SpringResourceDemo.java";
         FileSystemResource fileSystemResource = new FileSystemResource(currentJavaFilePath);
 //        String content = ResourceUtils.getContentByInputStream(fileSystemResource.getInputStream());
 //        System.out.println(content);

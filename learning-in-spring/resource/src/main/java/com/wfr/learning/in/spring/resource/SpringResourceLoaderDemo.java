@@ -62,7 +62,7 @@ public class SpringResourceLoaderDemo implements ResourceLoaderAware, Initializi
     }
 
     private static void readLocalFile() throws IOException {
-        String currentJavaFilePath = "/" + System.getProperty("user.dir") + "/learning-in-spring/resource/src/main/java/com/wfr/learning/resource/SpringResourceLoaderDemo.java";
+        String currentJavaFilePath = "/" + System.getProperty("user.dir") + "/learning-in-spring/resource/src/main/java/com/wfr/learning/in/spring/resource/SpringResourceLoaderDemo.java";
         // 新建一个 FileSystemResourceLoader 对象
         FileSystemResourceLoader resourceLoader = new FileSystemResourceLoader();
         // FileSystemResource => WritableResource => Resource
