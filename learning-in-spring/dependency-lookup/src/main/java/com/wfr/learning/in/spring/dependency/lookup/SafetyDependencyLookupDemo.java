@@ -23,15 +23,33 @@ public class SafetyDependencyLookupDemo {
         applicationContext.register(SafetyDependencyLookupDemo.class);
         applicationContext.refresh();
 
-        displayBeanFactoryGetBean(applicationContext);
+//        displayBeanFactoryGetBean(applicationContext);
+//
+//        displayObjectFactoryGetObject(applicationContext);
+//
+//        displayObjectProviderGetIfAvailable(applicationContext);
+//
+//        displayListableBeanFactory(applicationContext);
+//
+//        displayObjectProviderStream(applicationContext);
 
-        displayObjectFactoryGetObject(applicationContext);
+        ObjectProvider<User> beanProvider = applicationContext.getBeanProvider(User.class);
+        /**
+         * 比较 ifUnique 和 ifAvailable的区别
+         * 总结:
+         *  1. 存在多个相同类型Bean时, ifUnique的Consumer不做操作, ifAvailable则报错
+         *  2. 不存在Bean时, 两者都无操作
+         *  3. 存在唯一一个时，两者都进行Consumer操作
+         *
+         * 因此, 在需要确保拿取唯一一个Bean时, 直接使用 ifUnique 方法即可.
+         */
+        beanProvider.ifUnique(user -> {
+            System.out.println("unique: " + user);
+        });
+//        beanProvider.ifAvailable(user -> {
+//            System.out.println(user);
+//        });
 
-        displayObjectProviderGetIfAvailable(applicationContext);
-
-        displayListableBeanFactory(applicationContext);
-
-        displayObjectProviderStream(applicationContext);
 
         applicationContext.close();
     }
@@ -72,5 +90,15 @@ public class SafetyDependencyLookupDemo {
     @Bean
     public String getStr() {
         return "str";
+    }
+
+    @Bean
+    public User user() {
+        return User.createUser();
+    }
+
+    @Bean
+    public User user2() {
+        return User.createUser(2L);
     }
 }
