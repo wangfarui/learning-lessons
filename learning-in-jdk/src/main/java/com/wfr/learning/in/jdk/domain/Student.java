@@ -8,18 +8,25 @@ import java.util.Date;
  * @author wangfarui
  * @since 2022/4/18
  */
-public class Student {
+public class Student extends Person {
+
+    private static String STUDENT_NAME = "student";
 
     private Long id;
 
     private String name;
 
-    private Date birthday;
+    private Date birthday = new Date();
 
     private Classroom classroom;
 
+    static {
+        System.out.println("Student static method");
+    }
+
     public Student() {
-        System.out.println("调用 Student 无参构造方法");
+        System.out.println("调用 Student 无参构造方法. birthday: " + birthday);
+        System.out.println("STUDENT_NAME: " + STUDENT_NAME);
     }
 
     public Student(Long id, String name) {
