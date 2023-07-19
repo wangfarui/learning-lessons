@@ -41,6 +41,9 @@ public class CollectionTypeDependencyInjectionDemo {
     @Autowired
     private User[] userArray;
 
+    @Autowired
+    private Map<String, User> userMap;
+
     /**
      * 并非 StreamDependencyDescriptor
      */
@@ -68,6 +71,8 @@ public class CollectionTypeDependencyInjectionDemo {
         } else {
             System.out.println("demo.userStream is null");
         }
+
+        System.out.println(demo.userMap);
 
         applicationContext.close();
     }
